@@ -115,7 +115,7 @@ for i in range (value):
                 "fontcolor=white:"
                 "fontsize=160:"
                 "x=(w-text_w)/2:"
-                "y=20:"
+                "y=h-text_h-20:"
                 "borderw=3:"            
                 "bordercolor=black" 
             )
