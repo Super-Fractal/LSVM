@@ -7,6 +7,8 @@ from moviepy.editor import VideoFileClip, TextClip, clips_array, CompositeAudioC
 file_paths = glob.glob('input/*.mp4')
 times = 0
 
+volume = 0.5
+
 with open ('input/settings.txt', 'r') as file:
      data = file.read().strip()
      
@@ -22,19 +24,18 @@ for i in range (value):
     try:
         if str(times) == "0":
             #text
-            input_file = file_paths[0] 
-            text_to_show = "4\\^" + str(times)           
+            input_file = file_paths[0]       
             font_path = r"C\:/Windows/Fonts/arialbd.ttf"
 
             video_filter = (
                 f"scale=1920:1072,"
                 f"drawtext=fontfile='{font_path}':"
-                f"text='{text_to_show}':"
+                f"text='1':"
                 "fontcolor=white:"
                 "fontsize=160:"
                 "x=(w-text_w)/2:"
                 "y=h-text_h-20:"
-                "borderw=3:"            
+                "borderw=4:"            
                 "bordercolor=black" 
             )
             
@@ -49,7 +50,7 @@ for i in range (value):
                     ar='48000',           
                     preset='p7',
                     video_bitrate='5000k',     
-                    crf=0,  
+                    qp=0,  
                     **{'c:a': 'copy'}
                 )
                 .overwrite_output()
@@ -69,10 +70,10 @@ for i in range (value):
             clip3 = VideoFileClip("output/" + times + ".mp4")
             clip4 = VideoFileClip("output/" + times + ".mp4")
 
-        clip1 = clip1.set_audio(clip1.audio.volumex(0.5))
-        clip2 = clip2.set_audio(clip2.audio.volumex(0.5))
-        clip3 = clip3.set_audio(clip3.audio.volumex(0.5))
-        clip4 = clip4.set_audio(clip4.audio.volumex(0.5))
+        clip1 = clip1.set_audio(clip1.audio.volumex(volume))
+        clip2 = clip2.set_audio(clip2.audio.volumex(volume))
+        clip3 = clip3.set_audio(clip3.audio.volumex(volume))
+        clip4 = clip4.set_audio(clip4.audio.volumex(volume))
 
         clip2 = clip2.set_start(0.03)
         clip3 = clip3.set_start(0.06)
@@ -100,7 +101,7 @@ for i in range (value):
             bitrate="5000k",
             audio_codec="aac",
             audio_fps=48000,          
-            ffmpeg_params=["-crf", "0"]
+            ffmpeg_params=["-qp", "0"]
         )
         
         #text
@@ -116,7 +117,7 @@ for i in range (value):
                 "fontsize=160:"
                 "x=(w-text_w)/2:"
                 "y=h-text_h-20:"
-                "borderw=3:"            
+                "borderw=4:"            
                 "bordercolor=black" 
             )
         (
@@ -149,4 +150,4 @@ command = [
 ]
 
 subprocess.run(command)
-print("ended")
+print("finish")
