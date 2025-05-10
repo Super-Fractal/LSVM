@@ -3,11 +3,16 @@ import os
 import subprocess
 import ffmpeg
 from moviepy.editor import VideoFileClip, TextClip, clips_array, CompositeAudioClip
-
-file_paths = glob.glob('input/*.mp4')
 times = 0
-
 volume = 0.5
+
+video_extensions = ['mp4', 'mov', 'avi', 'mkv', 'flv', 'wmv', 'webm', 'm4v']
+file_paths = []
+
+for filepath in glob.glob('input/*'):
+    ext = os.path.splitext(filepath)[1][1:].lower()
+    if ext in video_extensions:
+        file_paths.append(filepath)
 
 with open ('input/settings.txt', 'r') as file:
      data = file.read().strip()
@@ -46,12 +51,10 @@ for i in range (value):
                     'output/layer0.mp4',
                     vf=video_filter,
                     vcodec='h264_nvenc',
-                    acodec='aac', 
-                    ar='48000',           
+                    acodec='aac',
+                    ar='44100',   
                     preset='p7',
-                    video_bitrate='5000k',     
-                    qp=0,  
-                    **{'c:a': 'copy'}
+                    qp=0,
                 )
                 .overwrite_output()
                 .run()
@@ -98,9 +101,8 @@ for i in range (value):
             codec="h264_nvenc",
             fps=clip1.fps,
             preset="p7",
-            bitrate="5000k",
+
             audio_codec="aac",
-            audio_fps=48000,          
             ffmpeg_params=["-qp", "0"]
         )
         
@@ -145,7 +147,6 @@ command = [
     "-i", file_list,
     "-c:v", "h264_nvenc",  
     "-c:a", "aac", 
-    "-ar", "48000",    
     output_file
 ]
 
