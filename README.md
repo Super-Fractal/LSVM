@@ -1,6 +1,6 @@
 # LSVM  
 LayerSync Video Maker (LSVM) is an automated tool designed to tile a video on screen, export it, and then repeat the process. This allows for an exponential multiplication effect of the same video and audio.
-Currently, LSVM primarily supports Windows with GPU acceleration.
+Currently, LSVM primarily supports Windows with GPU
 
 ## Important Warning 
 Please use this tool responsibly and at your own risk.  
