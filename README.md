@@ -29,12 +29,8 @@ https://github.com/Super-Fractal/LSVM-installer
 
 
 ## Known Issues & Limitations
-ーSize Issuesー  
-If the size (resolution) of each video is slightly different, this can cause problems   in the final processing.
-For example, one video may be “1920x1080” and another “1920x1072” with slightly different heights.
-To eliminate this discrepancy, all videos are forced to be converted to the 1920x1072 size.  
-
 ーVolume Issuesー   
+
 ## Future Development & TODO List
 We're actively working on improving LSVM! Here's what's on our roadmap:  
 
