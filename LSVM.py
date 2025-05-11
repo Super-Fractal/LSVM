@@ -33,7 +33,7 @@ for i in range (value):
             font_path = r"C\:/Windows/Fonts/arialbd.ttf"
 
             video_filter = (
-                f"scale=1920:1072,"
+                f"scale=1920:1080,"
                 f"drawtext=fontfile='{font_path}':"
                 f"text='1':"
                 "fontcolor=white:"
@@ -93,8 +93,6 @@ for i in range (value):
 
         final_audio = CompositeAudioClip([audio1, audio2, audio3, audio4])
         final_clip = final_clip.set_audio(final_audio)
-
-        final_clip = final_clip.resize((1920, 1072))
         
         final_clip.write_videofile(
             "output/" + str(int(times) + 1) + ".mp4",
@@ -103,7 +101,7 @@ for i in range (value):
             preset="p7",
 
             audio_codec="aac",
-            ffmpeg_params=["-qp", "0"]
+            ffmpeg_params=["-qp", "0", "-vf", "scale=1920:1080,setsar=1"]
         )
         
         #text
