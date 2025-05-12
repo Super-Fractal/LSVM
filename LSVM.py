@@ -4,6 +4,13 @@ import subprocess
 import ffmpeg
 from moviepy.editor import VideoFileClip, TextClip, clips_array, CompositeAudioClip
 times = 0
+
+#cpu = 0
+width = 1920
+height = 1080
+font = 'arialbd.ttf'
+font_size = 160
+#text_position = 1
 volume = 0.5
 
 video_extensions = ['mp4', 'mov', 'avi', 'mkv', 'flv', 'wmv', 'webm', 'm4v']
@@ -30,18 +37,16 @@ for i in range (value):
         if str(times) == "0":
             #text
             input_file = file_paths[0]       
-            font_path = r"C\:/Windows/Fonts/arialbd.ttf"
-
             video_filter = (
-                f"scale=1920:1080,"
-                f"drawtext=fontfile='{font_path}':"
+                f"scale={width}:{height},"
+                f"drawtext=fontfile='C\:/Windows/Fonts/{font}':"
                 f"text='1':"
-                "fontcolor=white:"
-                "fontsize=160:"
-                "x=(w-text_w)/2:"
-                "y=h-text_h-20:"
-                "borderw=4:"            
-                "bordercolor=black" 
+                f"fontcolor=white:"
+                f"fontsize={font_size}:"
+                f"x=(w-text_w)/2:"
+                f"y=h-text_h-20:"
+                f"borderw=4:"            
+                f"bordercolor=black" 
             )
             
             (
@@ -101,24 +106,26 @@ for i in range (value):
             preset="p7",
 
             audio_codec="aac",
-            ffmpeg_params=["-qp", "0", "-vf", "scale=1920:1080,setsar=1"]
+            ffmpeg_params = [
+                "-qp", "0",
+                "-vf", f"scale={width}:{height},setsar=1:1"
         )
         
         #text
         times = str(int(times) + 1)
         input_file = "output/" + str(times) + ".mp4"  
         text_to_show = "4\\^" + str(times)           
-        font_path = r"C\:/Windows/Fonts/arialbd.ttf"
-
+        
         video_filter = (
-                f"drawtext=fontfile='{font_path}':"
+                f"scale={width}:{height},"
+                f"drawtext=fontfile='C\:/Windows/Fonts/{font}':"
                 f"text='{text_to_show}':"
-                "fontcolor=white:"
-                "fontsize=160:"
-                "x=(w-text_w)/2:"
-                "y=h-text_h-20:"
-                "borderw=4:"            
-                "bordercolor=black" 
+                f"fontcolor=white:"
+                f"fontsize={font_size}:"
+                f"x=(w-text_w)/2:"
+                f"y=h-text_h-20:"
+                f"borderw=4:"            
+                f"bordercolor=black" 
             )
         (
             ffmpeg
@@ -149,4 +156,4 @@ command = [
 ]
 
 subprocess.run(command)
-print("finish")
+print("\ndone")
