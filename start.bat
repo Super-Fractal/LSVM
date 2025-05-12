@@ -1,7 +1,7 @@
 @echo off
 color 0F
 echo ===========================
-echo         LSVM v0.1
+echo         LSVM v0.2
 echo ===========================
 echo.
 
