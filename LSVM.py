@@ -9,7 +9,7 @@ times = 0
 width = 1920
 height = 1080
 font = 'arialbd.ttf'
-font_size = 160
+text_size = 160
 #text_position = 1
 volume = 0.5
 
@@ -42,7 +42,7 @@ for i in range (value):
                 f"drawtext=fontfile='C\:/Windows/Fonts/{font}':"
                 f"text='1':"
                 f"fontcolor=white:"
-                f"fontsize={font_size}:"
+                f"fontsize={text_size}:"
                 f"x=(w-text_w)/2:"
                 f"y=h-text_h-20:"
                 f"borderw=4:"            
@@ -109,6 +109,7 @@ for i in range (value):
             ffmpeg_params = [
                 "-qp", "0",
                 "-vf", f"scale={width}:{height},setsar=1:1"
+            ]
         )
         
         #text
@@ -121,7 +122,7 @@ for i in range (value):
                 f"drawtext=fontfile='C\:/Windows/Fonts/{font}':"
                 f"text='{text_to_show}':"
                 f"fontcolor=white:"
-                f"fontsize={font_size}:"
+                f"fontsize={text_size}:"
                 f"x=(w-text_w)/2:"
                 f"y=h-text_h-20:"
                 f"borderw=4:"            
