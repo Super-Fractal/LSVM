@@ -1,9 +1,11 @@
-import glob
 import os
 import subprocess
+import glob
+import math
 import ffmpeg
 from moviepy.editor import VideoFileClip, TextClip, clips_array, CompositeAudioClip
 times = 0
+number2 = 1
 
 #cpu = 0
 width = 1920
@@ -44,7 +46,7 @@ for i in range (value):
                 f"fontcolor=white:"
                 f"fontsize={text_size}:"
                 f"x=(w-text_w)/2:"
-                f"y=h-text_h-20:"
+                f"y=h-text_h-10:"
                 f"borderw=4:"            
                 f"bordercolor=black" 
             )
@@ -113,9 +115,27 @@ for i in range (value):
         )
         
         #text
+        if number2 <= 20:
+            number = 4**number2
+            number = (f'{number:,}')
+            print(number)
+            number2 = number2 + 1
+            
+        else:
+            if number2 == 21:
+               number = number.replace(",", "")
+               number = int(number)
+            number2 = number2 + 1
+            number = 4**number2
+            exp = int(math.floor(math.log10(number)))
+            mantissa_int = number // 10**(exp - 12)  # get 6 significant digits
+            mantissa = mantissa_int / 10**12  # now a float with ~6 digits
+            print(f'{mantissa:.12f}e+{exp}')
+            number = f'{mantissa:.12f}e+{exp}'
+        
         times = str(int(times) + 1)
         input_file = "output/" + str(times) + ".mp4"  
-        text_to_show = "4\\^" + str(times)           
+        text_to_show = number          
         
         video_filter = (
                 f"scale={width}:{height},"
@@ -124,7 +144,7 @@ for i in range (value):
                 f"fontcolor=white:"
                 f"fontsize={text_size}:"
                 f"x=(w-text_w)/2:"
-                f"y=h-text_h-20:"
+                f"y=h-text_h-10:"
                 f"borderw=4:"            
                 f"bordercolor=black" 
             )
