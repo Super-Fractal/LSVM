@@ -7,13 +7,22 @@ from moviepy.editor import VideoFileClip, TextClip, clips_array, CompositeAudioC
 times = 0
 number2 = 1
 
-#cpu = 0
+cpu = 0
 width = 1920
 height = 1080
 font = 'arialbd.ttf'
 text_size = 160
 #text_position = 1
 volume = 0.5
+
+if cpu == 0:
+    codec = 'h264_nvenc'
+    preset = 'p7'
+
+if cpu == 1:
+    codec = 'libx264'
+    preset = 'ultrafast'
+    
 
 video_extensions = ['mp4', 'mov', 'avi', 'mkv', 'flv', 'wmv', 'webm', 'm4v']
 file_paths = []
@@ -57,10 +66,10 @@ for i in range (value):
                 .output(
                     'output/layer0.mp4',
                     vf=video_filter,
-                    vcodec='h264_nvenc',
+                    vcodec = f'{codec}',
                     acodec='aac',
                     ar='44100',   
-                    preset='p7',
+                    preset = f'{preset}',
                     qp=0,
                 )
                 .overwrite_output()
@@ -103,10 +112,9 @@ for i in range (value):
         
         final_clip.write_videofile(
             "output/" + str(int(times) + 1) + ".mp4",
-            codec="h264_nvenc",
+            codec=codec,
             fps=clip1.fps,
-            preset="p7",
-
+            preset=preset,
             audio_codec="aac",
             ffmpeg_params = [
                 "-qp", "0",
@@ -171,7 +179,7 @@ command = [
     "-f", "concat",
     "-safe", "0",
     "-i", file_list,
-    "-c:v", "h264_nvenc",  
+    "-c:v", codec,
     "-c:a", "aac", 
     output_file
 ]
