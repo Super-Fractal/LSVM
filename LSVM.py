@@ -1,29 +1,38 @@
 import os
 import subprocess
+import time
 import glob
 import math
 import ffmpeg
 from moviepy.editor import VideoFileClip, TextClip, clips_array, CompositeAudioClip
 times = 0
-number2 = 1
+number2 = times + 1
 
 cpu = 0
 width = 1920
 height = 1080
 font = 'arialbd.ttf'
 text_size = 160
-#text_position = 1
+text_position = 2
 volume = 0.5
 
 if cpu == 0:
-    codec = 'h264_nvenc'
-    preset = 'p7'
-
+        codec = 'h264_nvenc'
+        preset = 'p7'
 if cpu == 1:
-    codec = 'libx264'
-    preset = 'ultrafast'
+        codec = 'libx264'
+        reset = 'ultrafast'
+if cpu == 2:
+        codec = 'h264_amf'
+        preset = 'p7'
     
-
+#if text_position = 0:
+    
+#if text_position = 1:
+    
+#if text_position = 2:
+    
+    
 video_extensions = ['mp4', 'mov', 'avi', 'mkv', 'flv', 'wmv', 'webm', 'm4v']
 file_paths = []
 
