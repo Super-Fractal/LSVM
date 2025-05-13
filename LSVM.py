@@ -26,12 +26,14 @@ if cpu == 2:
         codec = 'h264_amf'
         preset = 'p7'
     
-#if text_position = 0:
+if text_position == 0:
+        position = f"y=15"
     
-#if text_position = 1:
+if text_position == 1:
+        position = f"y=(h-text_h)/2"
     
-#if text_position = 2:
-    
+if text_position == 2:
+        position = f"y=h-text_h-10"
     
 video_extensions = ['mp4', 'mov', 'avi', 'mkv', 'flv', 'wmv', 'webm', 'm4v']
 file_paths = []
@@ -64,7 +66,7 @@ for i in range (value):
                 f"fontcolor=white:"
                 f"fontsize={text_size}:"
                 f"x=(w-text_w)/2:"
-                f"y=h-text_h-10:"
+                f"{position}:"
                 f"borderw=4:"            
                 f"bordercolor=black" 
             )
@@ -161,7 +163,7 @@ for i in range (value):
                 f"fontcolor=white:"
                 f"fontsize={text_size}:"
                 f"x=(w-text_w)/2:"
-                f"y=h-text_h-10:"
+                f"{position}:"
                 f"borderw=4:"            
                 f"bordercolor=black" 
             )
