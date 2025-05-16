@@ -21,7 +21,7 @@ if cpu == 0:
         preset = 'p7'
 if cpu == 1:
         codec = 'libx264'
-        reset = 'ultrafast'
+        preset = 'ultrafast'
 if cpu == 2:
         codec = 'h264_amf'
         preset = 'p7'
