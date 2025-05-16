@@ -7,6 +7,7 @@ import ffmpeg
 from moviepy.editor import VideoFileClip, TextClip, clips_array, CompositeAudioClip
 times = 0
 number2 = times + 1
+
 number3 = 0 #render time
 
 cpu = 0 #0: NVIDIA GPU 1: CPU 2: AMD GPU
@@ -132,10 +133,10 @@ for i in range (value):
         
         final_clip.write_videofile(
             output_path,
-            codec="libx264",
+            codec=codec,
             fps=clip1.fps,
             audio_codec="aac",
-            preset="medium",
+            preset=preset,
             ffmpeg_params=[ "-vf", f"scale={width}:{height},setsar=1:1"]
         )
         
