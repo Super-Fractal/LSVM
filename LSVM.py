@@ -7,14 +7,16 @@ import ffmpeg
 from moviepy.editor import VideoFileClip, TextClip, clips_array, CompositeAudioClip
 times = 0
 number2 = times + 1
+number3 = 0 #render time
 
-cpu = 0
+cpu = 0 #0: NVIDIA GPU 1: CPU 2: AMD GPU
 width = 1920
 height = 1080
 font = 'arialbd.ttf'
 text_size = 160
-text_position = 2
+text_position = 2 # 0: Top 1: Center 2: Bottom
 volume = 0.5
+dynaudnorm = 1 #volume setting2
 
 if cpu == 0:
         codec = 'h264_nvenc'
@@ -54,6 +56,7 @@ for file in file_paths:
     file_names.append(tmp)
 print(file_paths)
 
+start = time.time()
 for i in range (value): 
     try:
         if str(times) == "0":
@@ -121,17 +124,31 @@ for i in range (value):
         final_audio = CompositeAudioClip([audio1, audio2, audio3, audio4])
         final_clip = final_clip.set_audio(final_audio)
         
+        output_path = (
+            "output/" + str(int(times) + 1) + ".mp4"
+            if dynaudnorm == 0
+            else "output/" + str(int(times) + 1) + "tmp.mp4"
+        )   
+        
         final_clip.write_videofile(
-            "output/" + str(int(times) + 1) + ".mp4",
-            codec=codec,
+            output_path,
+            codec="libx264",
             fps=clip1.fps,
-            preset=preset,
             audio_codec="aac",
-            ffmpeg_params = [
-                "-qp", "0",
-                "-vf", f"scale={width}:{height},setsar=1:1"
-            ]
+            preset="medium",
+            ffmpeg_params=[ "-vf", f"scale={width}:{height},setsar=1:1"]
         )
+        
+        if dynaudnorm == 1:
+            subprocess.run([
+                "ffmpeg", "-y",
+                "-i", "output/" + str(int(times) + 1) + "tmp" + ".mp4",
+                "-af", "dynaudnorm",
+                "-c:v", "copy",   
+                "-c:a", "aac",
+                "output/" + str(int(times) + 1) + ".mp4"
+            ])
+            os.remove("output/" + str(int(times) + 1) + "tmp" + ".mp4")
         
         #text
         if number2 <= 20:
