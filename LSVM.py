@@ -8,8 +8,6 @@ from moviepy.editor import VideoFileClip, TextClip, clips_array, CompositeAudioC
 times = 0
 number2 = times + 1
 
-number3 = 0 #render time
-
 cpu = 0 #0: NVIDIA GPU 1: CPU 2: AMD GPU
 width = 1920
 height = 1080
@@ -57,7 +55,6 @@ for file in file_paths:
     file_names.append(tmp)
 print(file_paths)
 
-start = time.time()
 for i in range (value): 
     try:
         if str(times) == "0":
