@@ -15,7 +15,7 @@ font = 'arialbd.ttf'
 text_size = 160
 text_position = 2 # 0: Top 1: Center 2: Bottom
 volume = 0.5
-dynaudnorm = 1 #volume setting2
+dynaudnorm = 0 #volume setting2
 
 if cpu == 0:
         codec = 'h264_nvenc'
