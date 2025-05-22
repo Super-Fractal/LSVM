@@ -374,11 +374,11 @@ def process_video_layers(
 with gr.Blocks(theme=gr.themes.Default()) as demo:
     gr.Markdown("# LSVM v1.0")
     gr.Markdown("Upload a video, configure options, and generate a layered video with text overlays.")
-
+    
     with gr.Row(): # 横並びのセクション
         with gr.Column(scale=1): # 左側のカラム
             gr.Markdown("### Input & Output")
-            input_video = gr.File(label="Upload Input Video", file_types=['.mp4', '.mov', '.avi', '.mkv'])
+            input_video = gr.File(label="Upload Input Video", file_types=['.mp4', '.mov', '.avi', '.mkv', '.flv', '.wmv', '.webm', '.m4v'])
             output_filename_textbox = gr.Textbox(label="Output Filename (e.g., final_video.mp4)", value="layered_output.mp4")
             
             gr.Markdown("### Processing Settings")
