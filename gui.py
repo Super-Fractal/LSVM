@@ -426,11 +426,11 @@ with gr.Blocks(theme=gr.themes.Default()) as demo:
             gr.Markdown("### Audio Settings")
             volume_input_slider = gr.Slider(
                 label="Volume Multiplier for Layered Audio (in 2x2 composite)", 
-                minimum=0.0, maximum=1.0, value=0.25, step=0.01 # デフォルトを少し小さめに (4重になるため)
+                minimum=0.0, maximum=1.0, value=0.3, step=0.01 # デフォルトを少し小さめに (4重になるため)
             )
             dynaudnorm_checkbox_input = gr.Checkbox(
                 label="Enable Dynamic Audio Normalization (dynaudnorm) for 2x2 composited stages", 
-                value=True # デフォルトで有効にしても良いかも
+                value=False 
             )
 
     process_button = gr.Button("Start Processing", variant="primary")
